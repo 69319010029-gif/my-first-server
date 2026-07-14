@@ -12,15 +12,13 @@ const server = http.createServer((req, res) => {
     <html lang="th">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Railway Server</title>
-
         <style>
             *{
                 margin:0;
                 padding:0;
                 box-sizing:border-box;
-                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-family:'Segoe UI',sans-serif;
             }
 
             body{
@@ -28,87 +26,66 @@ const server = http.createServer((req, res) => {
                 display:flex;
                 justify-content:center;
                 align-items:center;
-                background:url('https://images.alphacoders.com/122/1226390.jpg')
-                no-repeat center center/cover;
-            }
-
-            .overlay{
-                position:absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:100%;
-                background:rgba(0,0,0,0.55);
+                background:
+                    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                    url('background.jpg');
+                background-size:cover;
+                background-position:center;
+                color:white;
             }
 
             .card{
-                position:relative;
-                z-index:1;
-                background:rgba(255,255,255,0.12);
-                backdrop-filter:blur(12px);
+                text-align:center;
+                background:rgba(255,255,255,0.1);
+                backdrop-filter:blur(10px);
                 padding:40px;
                 border-radius:25px;
-                text-align:center;
-                color:white;
+                box-shadow:0 0 30px rgba(0,0,0,0.5);
                 width:420px;
-                box-shadow:0 8px 30px rgba(0,0,0,0.4);
             }
 
             .profile{
                 width:150px;
                 height:150px;
                 border-radius:50%;
+                border:4px solid #00d4ff;
                 object-fit:cover;
-                border:4px solid #fff;
                 margin-bottom:20px;
-                box-shadow:0 0 20px rgba(255,255,255,0.5);
+                box-shadow:0 0 20px #00d4ff;
             }
 
             h1{
+                color:#00d4ff;
                 margin-bottom:10px;
-                font-size:28px;
             }
 
             p{
+                margin:8px 0;
                 font-size:18px;
-                margin:10px 0;
             }
 
             .status{
                 color:#00ff88;
                 font-weight:bold;
+                margin-top:15px;
             }
         </style>
     </head>
-
     <body>
 
-        <div class="overlay"></div>
-
         <div class="card">
+            <img src="profile.jpg" alt="Profile" class="profile">
 
-            <img
-                class="profile"
-                src="https://pbs.twimg.com/media/FV9uZg3XEAALc6A.jpg"
-                alt="Profile"
-            >
+            <h1>🚀 Railway Web Server</h1>
 
-            <h1>นายศุภวิชญ์ รุ่งกิจพัฒน์</h1>
-
-            <p>รหัสนักศึกษา : 69319010029</p>
+            <p><strong>นายศุภวิชญ์ รุ่งกิจพัฒน์</strong></p>
+            <p>รหัสนักศึกษา 69319010029</p>
 
             <p class="status">
-                🚀 Railway Web Server Online
+                ✅ เครื่องแม่ข่ายทำงานปกติบน Railway แล้ว!
             </p>
 
-            <p>
-                เครื่องแม่ข่ายทำงานปกติแล้วครับ
-            </p>
-
-            <p>
-                Node.js + Railway + HTML + CSS
-            </p>
-
+            <p>Node.js HTTP Server</p>
         </div>
 
     </body>
@@ -118,6 +95,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
     console.log(
-        \`🚀 Server is running! เครื่องแม่ข่ายทำงานแล้วที่ช่องทาง: \${port}\`
+        `🚀 Server is running! เครื่องแม่ข่ายเปิดทำงานแล้วที่ Port: ${port}`
     );
 });
