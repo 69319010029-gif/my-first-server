@@ -1,23 +1,123 @@
-// 1. เรียกใชงาน Module ที่ชื่อวา 'http' ซึ่งเปนระบบพื้นฐานของ Node.js สําหรับทําเซิรฟ เวอร
 const http = require('http');
 
- // 2. กําหนดชองทาง (Port) ที่เซิรฟเวอรจะใชสื่อสาร โดยใหใชของที่ Cloud กําหนดมา(process.env.PORT) ถาไมมีใหใช 3000
- const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
- // 3. สรางเครื่องแมขาย (Server) ที่คอยรับคําขอ (req) และตอบกลับ (res)
- const server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
 
- // 3.1 ตั้งรหัสสถานะ 200 หมายถึง "ทํางานสําเร็จ (OK)"
- res.statusCode = 200;
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
- // 3.2 บอกเบราวเซอรของผูใชวา สิ่งที่สงกลับไปคือไฟลขอความแบบ HTML และรองรับภาษาไทย (utf-8)
- res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.end(`
+    <!DOCTYPE html>
+    <html lang="th">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Railway Server</title>
 
- // 3.3 สงขอมูลหนาเว็บกลับไปหาผูใช (*** ใหนักศึกษาแกชื่อ-นามสกุลตรงนี้ ***)
- res.end('<h1>สวัสดีครับ! นี่คือ Web Server ของ [นายศุภวิชญ์ รุ่งกิจพัฒน์ และ รหัสนักศึกษา 69319010029 </h1><p>เครื่องแม่ข่ายทํางานปกติบนระบบ Railway แล้วครับผม!</p>');
- });
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
 
- // 4. สั่งใหเซิรฟเวอรเริ่มตนเปดรับฟงการเชื่อมตอตาม Port ที่กําหนดไว
- server.listen(port, () => {
- console.log(`Server is running! เครื่องแม่ข่ายเป็ดทํางานแล้วที่ช่องทาง: ${port}`);
- });
+            body{
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                background:url('https://images.alphacoders.com/122/1226390.jpg')
+                no-repeat center center/cover;
+            }
+
+            .overlay{
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                background:rgba(0,0,0,0.55);
+            }
+
+            .card{
+                position:relative;
+                z-index:1;
+                background:rgba(255,255,255,0.12);
+                backdrop-filter:blur(12px);
+                padding:40px;
+                border-radius:25px;
+                text-align:center;
+                color:white;
+                width:420px;
+                box-shadow:0 8px 30px rgba(0,0,0,0.4);
+            }
+
+            .profile{
+                width:150px;
+                height:150px;
+                border-radius:50%;
+                object-fit:cover;
+                border:4px solid #fff;
+                margin-bottom:20px;
+                box-shadow:0 0 20px rgba(255,255,255,0.5);
+            }
+
+            h1{
+                margin-bottom:10px;
+                font-size:28px;
+            }
+
+            p{
+                font-size:18px;
+                margin:10px 0;
+            }
+
+            .status{
+                color:#00ff88;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="overlay"></div>
+
+        <div class="card">
+
+            <img
+                class="profile"
+                src="https://pbs.twimg.com/media/FV9uZg3XEAALc6A.jpg"
+                alt="Profile"
+            >
+
+            <h1>นายศุภวิชญ์ รุ่งกิจพัฒน์</h1>
+
+            <p>รหัสนักศึกษา : 69319010029</p>
+
+            <p class="status">
+                🚀 Railway Web Server Online
+            </p>
+
+            <p>
+                เครื่องแม่ข่ายทำงานปกติแล้วครับ
+            </p>
+
+            <p>
+                Node.js + Railway + HTML + CSS
+            </p>
+
+        </div>
+
+    </body>
+    </html>
+    `);
+});
+
+server.listen(port, () => {
+    console.log(
+        \`🚀 Server is running! เครื่องแม่ข่ายทำงานแล้วที่ช่องทาง: \${port}\`
+    );
+});
